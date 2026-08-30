@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile | SmartQuiz{% endblock %}
+
+{% block content %}
+
+<section class="profile-page">
+
+    <!-- PAGE HEADER -->
+    <div class="page-header">
+
+        <div>
+            <span class="section-tag">MY ACCOUNT</span>
+            <h1>My Profile 👤</h1>
+            <p>View your account information and learning statistics.</p>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            Dashboard →
+        </a>
+
+    </div>
+
+
+    <div class="profile-grid">
+
+        <!-- PROFILE CARD -->
+        <div class="profile-card">
+
+            <div class="profile-avatar">
+                {{ user.name[0]|upper }}
+            </div>
+
+            <h2>{{ user.name }}</h2>
+
+            <p class="profile-email">
+                {{ user.email }}
+            </p>
+
+            <span class="profile-role">
+                🎓 {{ user.role|capitalize }}
+            </span>
+
+            <div class="profile-member">
+
+                <span>Member Since</span>
+
+                <strong>
+                    {{ user.created_at }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- STATISTICS -->
+        <div class="profile-stats-section">
+
+            <div class="profile-stats-header">
+
+                <span class="section-tag">
+                    PERFORMANCE
+                </span>
+
+                <h2>Your Learning Statistics</h2>
+
+            </div>
+
+
+            <div class="profile-stats-grid">
+
+                <div class="profile-stat-card">
+
+                    <div class="profile-stat-icon">
+                        📝
+                    </div>
+
+                    <div>
+                        <h3>{{ stats.total_quizzes }}</h3>
+                        <p>Quizzes Completed</p>
+                    </div>
+
+                </div>
+
+
+                <div class="profile-stat-card">
+
+                    <div class="profile-stat-icon">
+                        🏆
+                    </div>
+
+                    <div>
+                        <h3>
+                            {{ "%.0f"|format(stats.highest_score) }}%
+                        </h3>
+
+                        <p>Highest Score</p>
+                    </div>
+
+                </div>
+
+
+                <div class="profile-stat-card">
+
+                    <div class="profile-stat-icon">
+                        📊
+                    </div>
+
+                    <div>
+                        <h3>
+                            {{ "%.0f"|format(stats.average_score) }}%
+                        </h3>
+
+                        <p>Average Score</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOTIVATION CARD -->
+            <div class="profile-motivation">
+
+                <div class="motivation-icon">
+                    🚀
+                </div>
+
+                <div>
+
+                    <h3>Keep Learning!</h3>
+
+                    <p>
+                        Every quiz you take is a step toward improving
+                        your knowledge. Challenge yourself today!
+                    </p>
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="text-link"
+                    >
+                        Explore Quizzes →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+
+{% block title %}Quiz History | SmartQuiz{% endblock %}
+
+{% block content %}
+
+<section class="history-page">
+
+    <div class="page-header">
+
+        <div>
+            <span class="section-tag">YOUR PROGRESS</span>
+            <h1>Quiz History 📜</h1>
+            <p>Track all your previous quiz attempts and performance.</p>
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            Take a Quiz →
+        </a>
+
+    </div>
+
+
+    {% if results %}
+
+    <div class="history-summary">
+
+        <div class="history-summary-card">
+            <span>📝</span>
+            <div>
+                <strong>{{ results|length }}</strong>
+                <p>Total Attempts</p>
+            </div>
+        </div>
+
+        <div class="history-summary-card">
+            <span>🏆</span>
+            <div>
+                <strong>
+                    {{ "%.0f"|format(results|map(attribute='percentage')|max) }}%
+                </strong>
+                <p>Best Score</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="history-list">
+
+        {% for result in results %}
+
+        <div class="history-card">
+
+            <div class="history-left">
+
+                <div class="history-icon">
+                    {{ result.icon }}
+                </div>
+
+                <div class="history-info">
+
+                    <h3>{{ result.subject_name }}</h3>
+
+                    <p>
+                        Attempt #{{ loop.index }}
+                    </p>
+
+                    <small>
+                        {{ result.completed_at }}
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <div class="history-right">
+
+                <div class="history-score">
+
+                    {% if result.percentage >= 80 %}
+                        <span class="score excellent">
+                    {% elif result.percentage >= 50 %}
+                        <span class="score good">
+                    {% else %}
+                        <span class="score needs-work">
+                    {% endif %}
+
+                        {{ "%.0f"|format(result.percentage) }}%
+
+                    </span>
+
+                    <p>
+                        {{ result.score }} / {{ result.total_questions }}
+                        correct
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="{{ url_for('result', result_id=result.id) }}"
+                    class="history-view-btn"
+                >
+                    View →
+                </a>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    {% else %}
+
+    <div class="empty-state large-empty">
+
+        <div class="empty-icon">📚</div>
+
+        <h2>No Quiz History Yet!</h2>
+
+        <p>
+            You haven't completed any quizzes yet.
+            Start your first quiz and your results will appear here.
+        </p>
+
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+            Start Your First Quiz →
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

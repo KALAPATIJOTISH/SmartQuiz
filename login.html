@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+
+{% block title %}Login | SmartQuiz{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- LEFT VISUAL SECTION -->
+        <div class="auth-visual">
+
+            <div class="auth-visual-content">
+
+                <div class="auth-big-icon">🎓</div>
+
+                <span class="section-tag light-tag">
+                    WELCOME BACK
+                </span>
+
+                <h1>
+                    Continue Your Journey<br>
+                    of <span>Smarter Learning.</span>
+                </h1>
+
+                <p>
+                    Login to continue practicing quizzes, tracking
+                    your progress, and improving your knowledge.
+                </p>
+
+                <div class="auth-benefits">
+                    <div>✓ Continue your learning journey</div>
+                    <div>✓ View your quiz history</div>
+                    <div>✓ Track your performance</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOGIN FORM -->
+        <div class="auth-form-side">
+
+            <div class="auth-form-box">
+
+                <div class="auth-header">
+
+                    <h2>Welcome Back 👋</h2>
+
+                    <p>
+                        Enter your details to access your SmartQuiz account.
+                    </p>
+
+                </div>
+
+
+                <form method="POST"
+                      action="{{ url_for('login') }}"
+                      class="auth-form">
+
+
+                    <!-- EMAIL -->
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- SUBMIT -->
+                    <button
+                        type="submit"
+                        class="btn btn-primary auth-submit"
+                    >
+                        Login →
+                    </button>
+
+                </form>
+
+
+                <div class="auth-divider">
+                    <span>New to SmartQuiz?</span>
+                </div>
+
+
+                <p class="auth-switch">
+
+                    <a href="{{ url_for('register') }}">
+                        Create your free account →
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
