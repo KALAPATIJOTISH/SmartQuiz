@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}{{ subject.name }} Quiz | SmartQuiz{% endblock %}
+
+{% block content %}
+
+<section class="quiz-page">
+
+    <!-- QUIZ HEADER -->
+    <div class="quiz-header">
+
+        <div class="quiz-header-info">
+
+            <a href="{{ url_for('dashboard') }}" class="back-link">
+                ← Back to Dashboard
+            </a>
+
+            <div class="quiz-title-row">
+                <div class="subject-icon large-icon">
+                    {{ subject.icon }}
+                </div>
+
+                <div>
+                    <span class="section-tag">SMART QUIZ</span>
+                    <h1>{{ subject.name }}</h1>
+                    <p>{{ questions|length }} Questions • Answer Carefully</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="quiz-progress-box">
+            <span>Progress</span>
+            <strong id="progressText">0 / {{ questions|length }}</strong>
+        </div>
+
+    </div>
+
+
+    <!-- PROGRESS BAR -->
+    <div class="quiz-progress-bar">
+        <div
+            class="quiz-progress-fill"
+            id="progressFill"
+            style="width: 0%;"
+        ></div>
+    </div>
+
+
+    <!-- QUIZ FORM -->
+    <form
+        method="POST"
+        action="{{ url_for('submit_quiz', subject_id=subject.id) }}"
+        id="quizForm"
+    >
+
+        {% for question in questions %}
+
+        <div class="quiz-question-card">
+
+            <div class="question-top">
+
+                <span class="question-number">
+                    Question {{ loop.index }}
+                </span>
+
+                <span class="difficulty-badge {{ question.difficulty|lower }}">
+                    {{ question.difficulty }}
+                </span>
+
+            </div>
+
+
+            <h3 class="question-text">
+                {{ question.question }}
+            </h3>
+
+
+            <div class="options-grid">
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question.id }}"
+                        value="A"
+                    >
+
+                    <span class="option-letter">A</span>
+
+                    <span class="option-text">
+                        {{ question.option_a }}
+                    </span>
+
+                </label>
+
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question.id }}"
+                        value="B"
+                    >
+
+                    <span class="option-letter">B</span>
+
+                    <span class="option-text">
+                        {{ question.option_b }}
+                    </span>
+
+                </label>
+
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question.id }}"
+                        value="C"
+                    >
+
+                    <span class="option-letter">C</span>
+
+                    <span class="option-text">
+                        {{ question.option_c }}
+                    </span>
+
+                </label>
+
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question.id }}"
+                        value="D"
+                    >
+
+                    <span class="option-letter">D</span>
+
+                    <span class="option-text">
+                        {{ question.option_d }}
+                    </span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+        <!-- QUIZ SUBMIT -->
+        <div class="quiz-submit-section">
+
+            <div>
+                <h3>Ready to finish?</h3>
+                <p>
+                    Make sure you have answered all questions before submitting.
+                </p>
+            </div>
+
+            <button
+                type="submit"
+                class="btn btn-primary quiz-submit-btn"
+            >
+                Submit Quiz 🚀
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+{% endblock %}

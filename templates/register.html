@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Register | SmartQuiz{% endblock %}
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <div class="auth-visual">
+
+            <div class="auth-visual-content">
+                <div class="auth-big-icon">🧠</div>
+
+                <span class="section-tag light-tag">
+                    JOIN SMARTQUIZ
+                </span>
+
+                <h1>
+                    Start Your Journey<br>
+                    to <span>Smarter Learning.</span>
+                </h1>
+
+                <p>
+                    Create your account and unlock interactive quizzes,
+                    performance tracking, and a better way to learn.
+                </p>
+
+                <div class="auth-benefits">
+                    <div>✓ Interactive subject quizzes</div>
+                    <div>✓ Track your performance</div>
+                    <div>✓ Learn and improve daily</div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="auth-form-side">
+
+            <div class="auth-form-box">
+
+                <div class="auth-header">
+
+                    <h2>Create Account 🚀</h2>
+
+                    <p>
+                        Join SmartQuiz and start learning smarter today.
+                    </p>
+
+                </div>
+
+
+                <form method="POST"
+                      action="{{ url_for('register') }}"
+                      class="auth-form">
+
+                    <div class="form-group">
+
+                        <label for="name">
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Minimum 6 characters"
+                                minlength="6"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                data-target="password"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary auth-submit"
+                    >
+                        Create Account →
+                    </button>
+
+                </form>
+
+
+                <div class="auth-divider">
+                    <span>Already have an account?</span>
+                </div>
+
+
+                <p class="auth-switch">
+
+                    <a href="{{ url_for('login') }}">
+                        Login to your account →
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

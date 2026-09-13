@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block title %}SmartQuiz | Learn Smarter{% endblock %}
+
+{% block content %}
+
+<!-- HERO SECTION -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            🚀 Learn • Practice • Improve
+        </div>
+
+        <h1>
+            Challenge Your Mind.<br>
+            <span>Master Every Subject.</span>
+        </h1>
+
+        <p>
+            SmartQuiz makes learning interactive and exciting.
+            Test your knowledge, track your progress and become
+            a better learner every day.
+        </p>
+
+        <div class="hero-buttons">
+
+            {% if session.get('user_id') %}
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                    Go to Dashboard →
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary">
+                    Start Learning →
+                </a>
+
+                <a href="{{ url_for('login') }}" class="btn btn-outline">
+                    Login
+                </a>
+            {% endif %}
+
+        </div>
+
+        <div class="hero-stats">
+
+            <div class="hero-stat">
+                <h3>{{ subjects|length }}+</h3>
+                <p>Subjects</p>
+            </div>
+
+            <div class="hero-stat">
+                <h3>{{ total_questions }}+</h3>
+                <p>Questions</p>
+            </div>
+
+            <div class="hero-stat">
+                <h3>{{ total_users }}+</h3>
+                <p>Students</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-visual">
+
+        <div class="floating-card card-one">
+            🧠
+            <span>Think Smart</span>
+        </div>
+
+        <div class="floating-card card-two">
+            🏆
+            <span>Achieve More</span>
+        </div>
+
+        <div class="quiz-illustration">
+
+            <div class="brain-icon">🧠</div>
+
+            <div class="quiz-mini-card">
+
+                <div class="mini-header">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+
+                <p>Ready for a challenge?</p>
+
+                <div class="mini-options">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+<section class="features-section">
+
+    <div class="section-heading">
+
+        <span class="section-tag">WHY SMARTQUIZ?</span>
+
+        <h2>
+            Everything You Need to
+            <span>Learn Better</span>
+        </h2>
+
+        <p>
+            A simple and powerful platform designed to make
+            learning more interactive.
+        </p>
+
+    </div>
+
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Smart Quizzes</h3>
+            <p>
+                Practice subject-based quizzes and test your
+                understanding with interactive questions.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Track Progress</h3>
+            <p>
+                Monitor your quiz performance and see how
+                your knowledge improves over time.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+            <h3>Instant Results</h3>
+            <p>
+                Get your score immediately after completing
+                a quiz and track your achievements.
+            </p>
+        </div>
+
+
+        <div class="feature-card">
+            <div class="feature-icon">🏆</div>
+            <h3>Challenge Yourself</h3>
+            <p>
+                Explore different subjects and continuously
+                challenge your knowledge.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SUBJECTS SECTION -->
+<section class="subjects-section">
+
+    <div class="section-heading">
+
+        <span class="section-tag">EXPLORE SUBJECTS</span>
+
+        <h2>
+            Choose a Subject &
+            <span>Start Learning</span>
+        </h2>
+
+    </div>
+
+
+    <div class="subject-grid">
+
+        {% for subject in subjects %}
+
+        <div class="subject-card">
+
+            <div class="subject-icon">
+                {{ subject.icon }}
+            </div>
+
+            <h3>{{ subject.name }}</h3>
+
+            <p>
+                {{ subject.description }}
+            </p>
+
+            {% if session.get('user_id') %}
+
+                <a href="{{ url_for('quiz', subject_id=subject.id) }}"
+                   class="subject-btn">
+                    Start Quiz →
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('login') }}"
+                   class="subject-btn">
+                    Login to Start →
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- CALL TO ACTION -->
+<section class="cta-section">
+
+    <div class="cta-content">
+
+        <div>
+            <span class="section-tag light-tag">
+                READY TO START?
+            </span>
+
+            <h2>
+                Your Learning Journey<br>
+                Starts Today 🚀
+            </h2>
+
+            <p>
+                Join SmartQuiz and make every learning session count.
+            </p>
+        </div>
+
+        {% if not session.get('user_id') %}
+
+        <a href="{{ url_for('register') }}"
+           class="btn btn-light">
+            Create Free Account
+        </a>
+
+        {% else %}
+
+        <a href="{{ url_for('dashboard') }}"
+           class="btn btn-light">
+            Go to Dashboard
+        </a>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}
